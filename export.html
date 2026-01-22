@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Card Export</title>
+  <link rel="icon" type="image/png" href="../logo/logoCDC.png" />
+  <link rel="stylesheet" href="../cdcwebsite/styles.css" />
+  <link rel="stylesheet" href="namecard.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../cdcwebsite/index.html" class="brand">
+        <img src="../logo/logoCDC.png" alt="CDC symbol" class="brand-logo" />
+        <img src="../logo/nom.png" alt="C53ur Du Ciel (CDC)" class="brand-wordmark" />
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Editor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 90px;">
+    <section class="form-section">
+      <h1>Export Name Card</h1>
+      <p>This page uses your last saved card from the editor to generate an image with the card on top and the QR code below.</p>
+
+      <div id="exportCardWrapper" style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 2rem;">
+        <div id="cardPreview" class="design-card" style="max-width: 560px; width: 100%;">
+          <div class="design-text-block">
+            <div class="design-header-row">
+              <img src="../logo/logoCDC.png" alt="CDC" class="design-logo" />
+              <div class="design-header-text">
+                <div class="design-company" id="exportCompany">Company</div>
+              </div>
+            </div>
+            <div class="design-name" id="exportName">Your Name</div>
+            <div class="design-name-line"></div>
+            <div class="design-position" id="exportPosition">Post / Position</div>
+
+            <div class="design-contact-row">
+              <span class="design-contact-icon">☎</span>
+              <span class="design-line" id="exportPhones">+00 0000000000</span>
+            </div>
+            <div class="design-contact-row">
+              <span class="design-contact-icon">✉</span>
+              <span class="design-line" id="exportEmail">name@example.com</span>
+            </div>
+            <div class="design-contact-row">
+              <span class="design-contact-icon">📍</span>
+              <span class="design-line" id="exportAddress">Your address will appear here</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;">
+          <div style="width: 100%; max-width: 560px; background-color: #f1e3d4; padding: 20px; box-sizing: border-box;">
+            <p style="margin: 0 0 10px 0; color: #b7695c; font-size: 15px; text-align: center; font-family: 'Montserrat', sans-serif;">
+              QR code contact: <strong>Online</strong>
+            </p>
+            <div style="background: white; padding: 10px; width: fit-content; margin: 0 auto;">
+              <div id="exportOnlineQr"></div>
+            </div>
+          </div>
+
+          <div style="width: 100%; max-width: 560px; background-color: #f1e3d4; padding: 20px; box-sizing: border-box;">
+            <p style="margin: 0 0 10px 0; color: #b7695c; font-size: 15px; text-align: center; font-family: 'Montserrat', sans-serif;">
+              QR code contact: <strong>Phone</strong>
+            </p>
+            <div style="background: white; padding: 10px; width: fit-content; margin: 0 auto;">
+              <div id="exportQr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-actions" style="margin-top: 2rem; justify-content: space-between;">
+        <button type="button" class="save-button secondary" onclick="window.location.href='index.html'">Back to editor</button>
+        <button type="button" class="save-button" id="downloadBtn">Download image</button>
+      </div>
+
+      <p id="exportMessage" class="hint"></p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="export.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Card QR Generator</title>
+  <link rel="icon" type="image/png" href="../logo/logoCDC.png" />
+  <link rel="stylesheet" href="../cdcwebsite/styles.css" />
+  <link rel="stylesheet" href="namecard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <img src="../logo/logoCDC.png" alt="CDC symbol" class="brand-logo" />
+        <img src="../logo/nom.png" alt="Cœur Du Ciel (CDC)" class="brand-wordmark" />
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav">
+        <a href="../cdcwebsite/index.html#home" class="nav-link">Home</a>
+        <a href="../cdcwebsite/index.html#about" class="nav-link">About</a>
+        <a href="../cdcwebsite/index.html#services" class="nav-link">Services</a>
+        <a href="../cdcwebsite/index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="../cdcwebsite/index.html#contact" class="nav-link">Contact</a>
+        <a href="index.html" class="nav-link">Download</a>
+        <a href="https://namecard-17wq.onrender.com/secure-dashboard" class="nav-link">Login</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language selector">
+        <button type="button" class="lang-button active" data-lang="en">EN</button>
+        <button type="button" class="lang-button" data-lang="fr">FR</button>
+        <button type="button" class="lang-button" data-lang="zh">简</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h1>Create NameCard</h1>
+      <form id="contact-form">
+        <div class="field-row">
+          <label>
+            First name
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              pattern="[A-Za-zÀ-ÿ\s'`\-]+"
+              title="Please use letters, spaces, hyphens or apostrophes only"
+              inputmode="text"
+              required
+            />
+          </label>
+          <label>
+            Last name
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              pattern="[A-Za-zÀ-ÿ\s'`\-]+"
+              title="Please use letters, spaces, hyphens or apostrophes only"
+              inputmode="text"
+              required
+            />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label>
+            Mobile no.
+            <input
+              type="text"
+              id="mobile"
+              name="mobile"
+              placeholder="+33 6 12 34 56 78"
+              pattern="[0-9\s\(\)\+\-]{6,20}"
+              title="Numbers, spaces, parentheses and + - characters only"
+              inputmode="tel"
+              required
+            />
+          </label>
+          <label>
+            Office no.
+            <input
+              type="text"
+              id="office"
+              name="office"
+              placeholder="+33 1 23 45 67 89"
+              pattern="[0-9\s\(\)\+\-]{6,20}"
+              title="Numbers, spaces, parentheses and + - characters only"
+              inputmode="tel"
+            />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label>
+            Company
+            <input
+              type="text"
+              id="company"
+              name="company"
+              inputmode="text"
+            />
+          </label>
+          <label>
+            Post / Position
+            <input
+              type="text"
+              id="position"
+              name="position"
+              inputmode="text"
+            />
+          </label>
+        </div>
+
+        <label>
+          Email
+          <input type="email" id="email" placeholder="name@example.com" />
+        </label>
+
+        <label>
+          Address
+        </label>
+        <div class="field-row">
+          <label>
+            Street
+            <input type="text" id="addressStreet" name="addressStreet" />
+          </label>
+          <label>
+            City
+            <input type="text" id="addressCity" name="addressCity" />
+          </label>
+        </div>
+        <div class="field-row">
+          <label>
+            State / Region
+            <input type="text" id="addressRegion" name="addressRegion" />
+          </label>
+          <label>
+            ZIP, Country
+            <input type="text" id="addressZipCountry" name="addressZipCountry" />
+          </label>
+        </div>
+
+        <button type="submit" id="generateBtn">Create card</button>
+      </form>
+
+      <p class="hint">
+        After creating your online card, a QR code will appear on the right. Scan it with your phone to open your contact page and add it to your contacts.
+      </p>
+    </section>
+
+    <section class="output-section" id="outputSection">
+      <div class="card-column">
+        <div id="cardPreview" class="design-card" style="max-width: 560px; width: 100%;">
+          <div class="design-text-block">
+            <div class="design-header-row">
+              <img src="../logo/logoCDC.png" alt="CDC" class="design-logo" />
+              <div class="design-header-text">
+                <div class="design-company" id="designCompany">Company</div>
+              </div>
+            </div>
+            <div class="design-name" id="designName">Your Name</div>
+            <div class="design-name-line"></div>
+            <div class="design-position" id="designPosition">Post / Position</div>
+
+            <div class="design-contact-row">
+              <span class="design-contact-icon">☎</span>
+              <span class="design-line" id="designPhones">+00 0000000000</span>
+            </div>
+            <div class="design-contact-row">
+              <span class="design-contact-icon">✉</span>
+              <span class="design-line" id="designEmail">name@example.com</span>
+            </div>
+            <div class="design-contact-row">
+              <span class="design-contact-icon">📍</span>
+              <span class="design-line" id="designAddress">Address will appear here</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="export-link-row" style="margin-top: 1.5rem;">
+          <button
+            type="button"
+            onclick="window.location.href='export.html'"
+            class="export-link-button"
+          >
+            Open export preview
+          </button>
+          <input type="file" id="bgImageInput" accept="image/*" style="display:none;" />
+          <button type="button" id="changeBgBtn" class="export-link-button" style="margin-left: 0.5rem;">
+            Change background
+          </button>
+          <button type="button" id="toggleMoveModeBtn" class="export-link-button" style="margin-left: 0.5rem;">Move text</button>
+        </div>
+        <div id="bgMenu" style="display:none; margin-top:0.5rem; padding:0.75rem; border:1px solid #ddd; border-radius:8px; background:#fff5ef; max-width:560px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
+            <button type="button" id="bgUploadBtn" class="export-link-button">Choose image…</button>
+            <button type="button" id="toggleMoveBgBtn" class="export-link-button">Move background</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; width:100%; margin-top:8px;">
+            <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitCover" value="cover" checked> Cover</label>
+            <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitContain" value="contain"> Contain</label>
+            <label style="font-size:0.9rem; color:#555; margin-left:auto;">Overlay:
+              <input type="range" id="bgOverlay" min="0" max="0.35" step="0.01" value="0.15" style="vertical-align:middle; width:180px; margin-left:0.35rem;">
+            </label>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="qr-section">
+        <p class="hint" style="font-size:0.85rem; color:#555; margin-top:0; text-align:left;">
+          QR code contact:
+          <button type="button" id="showOnlineQrBtn" class="qr-toggle-link">Online</button>
+          <button type="button" id="showVcardQrBtn" class="qr-toggle-link">Phone</button>
+        </p>
+
+        <div id="onlineQrPanel" style="margin-top:0.5rem;">
+          <div id="qrcode" class="qr-box"></div>
+        </div>
+
+        <div id="vcardQrPanel" style="margin-top:0.5rem; display:none;">
+          <div id="directQrcode" class="qr-box"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="../cdcwebsite/mentions-legales.html">Mentions légales</a>
+        <a href="../cdcwebsite/politique-confidentialite.html">Politique de confidentialité</a>
+        <a href="../cdcwebsite/cgv.html">Conditions Générales de Vente et d'Utilisation</a>
+      </div>
+      <p class="footer-copy">Copyright © 2025 Cœur Du Ciel</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+  <script src="bg.js"></script>
+</body>
+</html>
