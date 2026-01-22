@@ -1,21 +1,26 @@
 import { pool } from './db.js';
+import jwt from 'jsonwebtoken';
 
-// Helper to load the current user from a simple token.
-// Token format (temporary): "<userId>:<tenantId>" (no signing yet).
-
+// Helper to load the current user from a JWT token signed with JWT_SECRET.
 export async function getUserFromToken(token) {
   if (!token || typeof token !== 'string') {
     return null;
   }
 
-  const parts = token.split(':');
-  const userId = parts[0];
-
-  if (!userId) {
+  const secret = process.env.JWT_SECRET || '';
+  if (!secret) {
+    // If secret is not configured, refuse auth
     return null;
   }
 
-  const id = parseInt(userId, 10);
+  let decoded;
+  try {
+    decoded = jwt.verify(token, secret);
+  } catch (e) {
+    return null;
+  }
+
+  const id = parseInt(decoded && decoded.id, 10);
   if (!Number.isFinite(id)) {
     return null;
   }
@@ -32,7 +37,6 @@ export async function getUserFromToken(token) {
   }
 
   const user = result.rows[0];
-
   return {
     id: user.id,
     tenantId: user.tenant_id,
@@ -41,9 +45,6 @@ export async function getUserFromToken(token) {
     displayName: user.display_name
   };
 }
-
-// Optional middleware for future use. Currently not wired to routes
-// so it does not change existing behavior unless explicitly enabled.
 
 export async function authMiddleware(req, _res, next) {
   try {

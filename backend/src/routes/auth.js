@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
+import jwt from 'jsonwebtoken';
 
 const router = Router();
 
@@ -54,12 +55,20 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Very simple, unsigned token for now.
-    const token = `${user.id}:${user.tenant_id || ''}`;
+    // Prefer signed JWT if secret is configured; otherwise fall back to legacy token
+    let token;
+    const secret = process.env.JWT_SECRET;
+    if (secret) {
+      token = jwt.sign({ id: user.id, tenantId: user.tenant_id, role: user.role }, secret, { expiresIn: '7d' });
+    } else {
+      token = `${user.id}:${user.tenant_id || ''}`;
+    }
 
     res.json({
       success: true,
       token,
+      // Optional: expose legacy format for debugging/migration if needed
+      legacyToken: `${user.id}:${user.tenant_id || ''}`,
       user: {
         id: user.id,
         tenantId: user.tenant_id,
