@@ -50,6 +50,12 @@ export async function initDb() {
       );
     `);
 
+    // Ensure optional flags exist for compatibility with queries
+    await client.query(`
+      ALTER TABLE users
+      ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+    `);
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS cards (
         id SERIAL PRIMARY KEY,
