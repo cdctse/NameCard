@@ -181,36 +181,10 @@ router.get('/', (_req, res) => {
       <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Scan link &amp; QR</h2>
       <p class="muted">Share this link behind a QR code or short URL. Each scan will be logged in the secure dashboard.</p>
       <div class="output-section">
-        <div class="card-column">
-          <div id="cardPreview" class="design-card" style="max-width:560px; width:100%;">
-            <div class="design-text-block">
-              <div class="design-header-row">
-                <img src="/image/logoCDC.png" alt="CDC" class="design-logo" />
-                <div class="design-header-text">
-                  <div class="design-company" id="designCompany">Company</div>
-                </div>
-              </div>
-              <div class="design-name" id="designName">Your Name</div>
-              <div class="design-name-line"></div>
-              <div class="design-position" id="designPosition">Post / Position</div>
-              <div class="design-contact-row">
-                <span class="design-contact-icon">☎</span>
-                <span class="design-line" id="designPhones">+00 0000000000</span>
-              </div>
-              <div class="design-contact-row">
-                <span class="design-contact-icon">✉</span>
-                <span class="design-line" id="designEmail">name@example.com</span>
-              </div>
-              <div class="design-contact-row">
-                <span class="design-contact-icon">📍</span>
-                <span class="design-line" id="designAddress">Address will appear here</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="qr-section">
           <p id="scanUrlText" style="font-size:0.85rem; word-break:break-all; margin-bottom:0.5rem;"></p>
           <div id="qrBox" class="qr-box"></div>
+          <a id="openScanBtn" class="btn" href="#" target="_blank" rel="noopener" style="margin-top:0.75rem; display:none;">Open preview page</a>
         </div>
       </div>
     </section>
@@ -230,6 +204,7 @@ router.get('/', (_req, res) => {
       var createStatus = document.getElementById('createStatus');
       var scanUrlText = document.getElementById('scanUrlText');
       var qrBox = document.getElementById('qrBox');
+      var openScanBtn = document.getElementById('openScanBtn');
 
       var firstNameInput = document.getElementById('firstName');
       var lastNameInput = document.getElementById('lastName');
@@ -441,6 +416,7 @@ router.get('/', (_req, res) => {
               scanUrlText.textContent = scanUrl;
               renderQr(scanUrl);
               resultSection.style.display = 'block';
+              if (openScanBtn) { openScanBtn.href = scanUrl; openScanBtn.style.display = 'inline-flex'; }
               setStatus('Card created.', 'ok');
             })
             .catch(function(err) {
