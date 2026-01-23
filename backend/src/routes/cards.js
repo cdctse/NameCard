@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
+import { getUserFromToken } from '../authContext.js';
 
 const router = Router();
 
@@ -42,25 +43,35 @@ router.post('/', async (req, res) => {
     const token = authHeader && authHeader.trim();
 
     if (token) {
-      const [userIdPart] = token.split(':');
-      const userId = parseInt(userIdPart, 10);
+      // First try JWT
+      try {
+        const u = await getUserFromToken(token);
+        if (u && u.tenantId != null) {
+          finalTenantId = u.tenantId;
+        }
+      } catch (e) {
+        // ignore and fall back to legacy format
+      }
 
-      if (Number.isFinite(userId)) {
-        try {
-          const meResult = await pool.query(
-            'SELECT id, tenant_id FROM users WHERE id = $1',
-            [userId]
-          );
-
-          if (meResult.rowCount > 0) {
-            const me = meResult.rows[0];
-            if (me.tenant_id != null) {
-              finalTenantId = me.tenant_id;
+      // Legacy fallback: "userId:tenantId"
+      if (finalTenantId == null) {
+        const [userIdPart] = token.split(':');
+        const userId = parseInt(userIdPart, 10);
+        if (Number.isFinite(userId)) {
+          try {
+            const meResult = await pool.query(
+              'SELECT id, tenant_id FROM users WHERE id = $1',
+              [userId]
+            );
+            if (meResult.rowCount > 0) {
+              const me = meResult.rows[0];
+              if (me.tenant_id != null) {
+                finalTenantId = me.tenant_id;
+              }
             }
+          } catch (authErr) {
+            console.error('Error resolving tenant for /api/cards (legacy):', authErr);
           }
-        } catch (authErr) {
-          console.error('Error resolving tenant for /api/cards:', authErr);
-          // Continue without tenant rather than failing card creation.
         }
       }
     }

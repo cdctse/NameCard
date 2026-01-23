@@ -9,8 +9,6 @@ router.get('/', (_req, res) => {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NameCard · Secure Card Builder</title>
-  <link rel="stylesheet" href="/nc-static/cdcwebsite/styles.css" />
-  <link rel="stylesheet" href="/nc-static/namecard.css" />
   <style>
     body { margin:0; padding:1.5rem; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7eee7; }
     .page { max-width: 960px; margin: 0 auto; }
@@ -49,6 +47,8 @@ router.get('/', (_req, res) => {
       .design-text-block { max-width:100%; padding:1.5rem 1.5rem 1.75rem; }
     }
   </style>
+  <link rel="stylesheet" href="/nc-static/cdcwebsite/styles.css" />
+  <link rel="stylesheet" href="/nc-static/namecard.css" />
 </head>
 <body>
   <main class="page">
