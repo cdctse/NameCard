@@ -313,7 +313,7 @@ router.get('/', (_req, res) => {
           cityLine += (cityLine ? ', ' : '') + region;
         }
         if (cityLine) addressParts.push(cityLine);
-        var addressDisplay = addressParts.length ? addressParts.join('\n') : 'Address will appear here';
+        var addressDisplay = addressParts.length ? addressParts.join('\\n') : 'Address will appear here';
 
         designNameEl.textContent = nameDisplay;
         designCompanyEl.textContent = companyDisplay;
