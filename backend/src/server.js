@@ -38,6 +38,13 @@ app.use('/secure-static', express.static(publicDir));
 // Example: /nc-static/namecard.css and /nc-static/cdcwebsite/styles.css
 const namecardRoot = path.resolve(__dirname, '../../');
 app.use('/nc-static', express.static(namecardRoot));
+// Also expose explicit file routes in case platform excludes parent dirs from the deploy context
+app.get('/nc-static/namecard.css', (_req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../namecard.css'));
+});
+app.get('/nc-static/cdcwebsite/styles.css', (_req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../cdcwebsite/styles.css'));
+});
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });

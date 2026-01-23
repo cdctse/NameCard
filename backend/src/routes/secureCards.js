@@ -47,7 +47,11 @@ router.get('/', (_req, res) => {
       .design-text-block { max-width:100%; padding:1.5rem 1.5rem 1.75rem; }
     }
   </style>
-  <link rel="stylesheet" href="/nc-static/cdcwebsite/styles.css" />
+  <!-- Use the same font as the public editor -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Load the shared NameCard stylesheet. Note: cdcwebsite/styles.css is not present in this deploy, so we omit it. -->
   <link rel="stylesheet" href="/nc-static/namecard.css" />
 </head>
 <body>
