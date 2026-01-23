@@ -34,6 +34,11 @@ app.use('/image', express.static(imageDir));
 const publicDir = path.resolve(__dirname, './public');
 app.use('/secure-static', express.static(publicDir));
 
+// Serve NameCard root as static so secure pages can reuse existing CSS/assets
+// Example: /nc-static/namecard.css and /nc-static/cdcwebsite/styles.css
+const namecardRoot = path.resolve(__dirname, '../../');
+app.use('/nc-static', express.static(namecardRoot));
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
