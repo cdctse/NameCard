@@ -83,7 +83,10 @@ router.get('/', async (req, res) => {
     .btn-ghost { background:#fff; color:#555; border-color:#e2d6cc; }
     .btn-ghost:hover { border-color:#cbb9aa; }
     .hint { margin-top:0.8rem; font-size:0.8rem; color:#8a7a6c; }
+    .qr-wrap { margin-top:1.25rem; text-align:center; }
+    .qr-box { display:inline-block; background:#fff; padding:1rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.06); }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var shareBtn = document.getElementById('shareButton');
@@ -141,8 +144,22 @@ router.get('/', async (req, res) => {
         ${card.email ? `<a class="btn btn-ghost" id="shareButton" href="mailto:${esc(card.email)}" data-mailto="mailto:${esc(card.email)}">Share</a>` : ''}
       </div>
       <p class="hint">Use "Save vCard" to add this contact directly to your phone or email client.</p>
+      <div class="qr-wrap">
+        <div id="qrBox" class="qr-box"></div>
+        <div style="margin-top:0.5rem; font-size:0.8rem; color:#7a6a5d; word-break:break-all;">${`https://` + req.headers.host + `/scan?t=` + encodeURIComponent(token)}</div>
+      </div>
     </section>
   </main>
+  <script>
+    (function(){
+      try {
+        var el = document.getElementById('qrBox');
+        if (el && window.QRCode) {
+          new QRCode(el, { text: window.location.href, width: 192, height: 192, correctLevel: QRCode.CorrectLevel.L });
+        }
+      } catch(_) {}
+    })();
+  </script>
 </body>
 </html>`);
   } catch (err) {
