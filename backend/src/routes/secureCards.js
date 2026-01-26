@@ -33,8 +33,14 @@ router.get('/', (_req, res) => {
         <a href="/nc-static/cdcwebsite/index.html#services" class="nav-link">Services</a>
         <a href="/nc-static/cdcwebsite/index.html#portfolio" class="nav-link">Portfolio</a>
         <a href="/nc-static/cdcwebsite/index.html#contact" class="nav-link">Contact</a>
-        <a href="/secure-dashboard" class="nav-link">Dashboard</a>
+        <a href="/nc-static/index.html" class="nav-link">Download</a>
+        <a href="/secure-dashboard" class="nav-link">Login</a>
       </nav>
+      <div class="lang-switch" aria-label="Language selector">
+        <button type="button" class="lang-button active" data-lang="en">EN</button>
+        <button type="button" class="lang-button" data-lang="fr">FR</button>
+        <button type="button" class="lang-button" data-lang="zh">简</button>
+      </div>
     </div>
   </header>
 
@@ -163,6 +169,9 @@ router.get('/', (_req, res) => {
         </div>
         <div id="createStatus" class="status"></div>
       </form>
+      <p class="hint">
+        After creating your online card, a QR code will appear on the right. Scan it with your phone to open your contact page and add it to your contacts.
+      </p>
     </section>
 
     <section id="preview-section" style="display:none;">
