@@ -48,68 +48,105 @@ router.get('/', (_req, res) => {
     </section>
 
     <section class="form-section" id="form-section" style="display:none;">
-      <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Create NameCard</h2>
+      <h2>Create NameCard</h2>
       <form id="card-form">
-        <div class="grid">
-          <div>
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" />
-          </div>
-          <div>
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" />
-          </div>
-          <div>
-            <label for="mobile">Mobile</label>
-            <input type="tel" id="mobile" placeholder="+33 6 12 34 56 78" />
-          </div>
-          <div>
-            <label for="office">Office</label>
-            <input type="tel" id="office" placeholder="+33 1 23 45 67 89" />
-          </div>
-          <div>
-            <label for="company">Company</label>
-            <input type="text" id="company" />
-          </div>
-          <div>
-            <label for="position">Post / Position</label>
-            <input type="text" id="position" />
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="name@example.com" />
-          </div>
+        <div class="field-row">
+          <label>
+            First name
+            <input
+              type="text"
+              id="firstName"
+              pattern="[A-Za-zÀ-ÿ\s'&#96;\-]+"
+              title="Please use letters, spaces, hyphens or apostrophes only"
+              inputmode="text"
+              required
+            />
+          </label>
+          <label>
+            Last name
+            <input
+              type="text"
+              id="lastName"
+              pattern="[A-Za-zÀ-ÿ\s'&#96;\-]+"
+              title="Please use letters, spaces, hyphens or apostrophes only"
+              inputmode="text"
+              required
+            />
+          </label>
         </div>
 
-        <div style="margin-top:0.8rem;">
-          <label>Address</label>
-          <div class="grid">
-            <div>
-              <label for="addressStreet">Street</label>
-              <input type="text" id="addressStreet" />
-            </div>
-            <div>
-              <label for="addressCity">City</label>
-              <input type="text" id="addressCity" />
-            </div>
-            <div>
-              <label for="addressRegion">State / Region</label>
-              <input type="text" id="addressRegion" />
-            </div>
-            <div>
-              <label for="addressZipCountry">ZIP, Country</label>
-              <input type="text" id="addressZipCountry" />
-            </div>
-          </div>
+        <div class="field-row">
+          <label>
+            Mobile no.
+            <input
+              type="text"
+              id="mobile"
+              placeholder="+33 6 12 34 56 78"
+              pattern="[0-9\s\(\)\+\-]{6,20}"
+              title="Numbers, spaces, parentheses and + - characters only"
+              inputmode="tel"
+              required
+            />
+          </label>
+          <label>
+            Office no.
+            <input
+              type="text"
+              id="office"
+              placeholder="+33 1 23 45 67 89"
+              pattern="[0-9\s\(\)\+\-]{6,20}"
+              title="Numbers, spaces, parentheses and + - characters only"
+              inputmode="tel"
+            />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label>
+            Company
+            <input type="text" id="company" inputmode="text" />
+          </label>
+          <label>
+            Post / Position
+            <input type="text" id="position" inputmode="text" />
+          </label>
+        </div>
+
+        <label>
+          Email
+          <input type="email" id="email" placeholder="name@example.com" />
+        </label>
+
+        <label>Address</label>
+        <div class="field-row">
+          <label>
+            Street
+            <input type="text" id="addressStreet" />
+          </label>
+          <label>
+            City
+            <input type="text" id="addressCity" />
+          </label>
+        </div>
+        <div class="field-row">
+          <label>
+            State / Region
+            <input type="text" id="addressRegion" />
+          </label>
+          <label>
+            ZIP, Country
+            <input type="text" id="addressZipCountry" />
+          </label>
+        </div>
           <div class="export-link-row" style="margin-top: 1rem;">
             <input type="file" id="bgImageInput" accept="image/*" style="display:none;" />
-            <button type="button" id="changeBgBtn" class="btn" style="margin-right:0.5rem;">Change background</button>
-            <button type="button" id="toggleMoveModeBtn" class="btn">Move text</button>
+            <button type="button" id="changeBgBtn" class="export-link-button" style="margin-right:0.5rem;">Change background</button>
+            <button type="button" id="toggleMoveModeBtn" class="export-link-button">Move text</button>
           </div>
           <div id="bgMenu" style="display:none; margin-top:0.5rem; padding:0.75rem; border:1px solid #ddd; border-radius:8px; background:#fff5ef; max-width:560px;">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
-              <button type="button" id="bgUploadBtn" class="btn">Choose image…</button>
-              <button type="button" id="toggleMoveBgBtn" class="btn">Move background</button>
+              <button type="button" id="bgUploadBtn" class="export-link-button">Choose image…</button>
+              <button type="button" id="toggleMoveBgBtn" class="export-link-button">Move background</button>
             </div>
             <div style="display:flex; align-items:center; gap:10px; width:100%; margin-top:8px;">
               <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitCover" value="cover" checked> Cover</label>
@@ -122,8 +159,8 @@ router.get('/', (_req, res) => {
         </div>
 
         <div style="margin-top:0.8rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-          <button type="submit" id="createCardBtn" class="btn">Create card</button>
-          <button type="button" id="backToDashboardBtn" class="btn">Back to dashboard</button>
+          <button type="submit" id="createCardBtn" class="export-link-button">Create card</button>
+          <button type="button" id="backToDashboardBtn" class="export-link-button">Back to dashboard</button>
         </div>
         <div id="createStatus" class="status"></div>
       </form>
@@ -172,7 +209,7 @@ router.get('/', (_req, res) => {
         <div class="qr-section">
           <p id="scanUrlText" style="font-size:0.85rem; word-break:break-all; margin-bottom:0.5rem;"></p>
           <div id="qrBox" class="qr-box"></div>
-          <a id="openScanBtn" class="btn" href="#" target="_blank" rel="noopener" style="margin-top:0.75rem; display:none;">Open preview page</a>
+          <a id="openScanBtn" class="export-link-button" href="#" target="_blank" rel="noopener" style="margin-top:0.75rem; display:none;">Open preview page</a>
         </div>
       </div>
     </section>
