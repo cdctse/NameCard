@@ -14,7 +14,7 @@ router.get('/', (_req, res) => {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Load the shared NameCard stylesheet. Note: cdcwebsite/styles.css is not present in this deploy, so we omit it. -->
-  <link rel="stylesheet" href="/cdcwebsite/styles.css" />
+  <link rel="stylesheet" href="/nc-static/cdcwebsite/styles.css" />
   <link rel="stylesheet" href="/nc-static/namecard.css" />
 </head>
 <body>
@@ -217,7 +217,6 @@ router.get('/', (_req, res) => {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="/secure-static/secure-bg.js"></script>
-  <script src="/nc-static/script.js"></script>
   <script>
     (function() {
       var accessInfo = document.getElementById('accessInfo');
