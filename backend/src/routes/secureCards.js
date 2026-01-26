@@ -53,14 +53,22 @@ router.get('/', (_req, res) => {
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Load the shared NameCard stylesheet. Note: cdcwebsite/styles.css is not present in this deploy, so we omit it. -->
   <link rel="stylesheet" href="/nc-static/namecard.css" />
+  <link rel="stylesheet" href="/cdcwebsite/styles.css" />
 </head>
 <body>
-  <main class="page">
-    <div class="brand" style="display:flex; align-items:center; gap:0.5rem;">
-      <img src="/image/logoCDC.png" alt="CDC logo" style="height:26px; border-radius:4px;" />
-      <img src="/image/nom.png" alt="Cœur Du Ciel" style="height:20px;" />
-      <span style="font-weight:600; letter-spacing:0.12em; font-size:0.8rem; text-transform:uppercase; color:#b66b4d;">Digital NameCard</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/nc-static/cdcwebsite/index.html#home" class="brand">
+        <img src="/image/logoCDC.png" alt="CDC symbol" class="brand-logo" />
+        <img src="/image/nom.png" alt="Cœur Du Ciel (CDC)" class="brand-wordmark" />
+      </a>
+      <nav class="main-nav">
+        <a href="/secure-dashboard" class="nav-link">Dashboard</a>
+      </nav>
     </div>
+  </header>
+
+  <main class="container" style="margin-top: 90px;">
     <h1>Secure NameCard Builder</h1>
     <p class="muted">Create database-backed NameCards for your staff. Scans will appear on the secure dashboard for your company.</p>
 
@@ -68,7 +76,7 @@ router.get('/', (_req, res) => {
       <p id="accessInfo" class="muted"></p>
     </section>
 
-    <section class="section" id="form-section" style="display:none;">
+    <section class="form-section" id="form-section" style="display:none;">
       <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Create NameCard</h2>
       <form id="card-form">
         <div class="grid">
