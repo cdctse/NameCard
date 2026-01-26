@@ -48,6 +48,9 @@ app.get('/nc-static/namecard.css', (_req, res) => {
 app.get('/nc-static/cdcwebsite/styles.css', (_req, res) => {
   res.sendFile(path.resolve(__dirname, '../../cdcwebsite/styles.css'));
 });
+// Serve cdcwebsite directly so pages that reference ../cdcwebsite/styles.css resolve to /cdcwebsite/styles.css
+const cdcWebsiteDir = path.resolve(__dirname, '../../cdcwebsite');
+app.use('/cdcwebsite', express.static(cdcWebsiteDir));
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
