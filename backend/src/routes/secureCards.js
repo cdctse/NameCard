@@ -143,24 +143,6 @@ router.get('/', (_req, res) => {
             <input type="text" id="addressZipCountry" />
           </label>
         </div>
-          <div class="export-link-row" style="margin-top: 1rem;">
-            <input type="file" id="bgImageInput" accept="image/*" style="display:none;" />
-            <button type="button" id="changeBgBtn" class="export-link-button" style="margin-right:0.5rem;">Change background</button>
-            <button type="button" id="toggleMoveModeBtn" class="export-link-button">Move text</button>
-          </div>
-          <div id="bgMenu" style="display:none; margin-top:0.5rem; padding:0.75rem; border:1px solid #ddd; border-radius:8px; background:#fff5ef; max-width:560px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
-              <button type="button" id="bgUploadBtn" class="export-link-button">Choose image…</button>
-              <button type="button" id="toggleMoveBgBtn" class="export-link-button">Move background</button>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px; width:100%; margin-top:8px;">
-              <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitCover" value="cover" checked> Cover</label>
-              <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitContain" value="contain"> Contain</label>
-              <label style="font-size:0.9rem; color:#555; margin-left:auto;">Overlay:
-                <input type="range" id="bgOverlay" min="0" max="0.35" step="0.01" value="0.15" style="vertical-align:middle; width:180px; margin-left:0.35rem;">
-              </label>
-            </div>
-          </div>
         </div>
 
         <div style="margin-top:0.8rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
@@ -175,7 +157,7 @@ router.get('/', (_req, res) => {
     </section>
 
     <section id="preview-section" style="display:none;">
-      <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Live preview</h2>
+      <h2>Live preview</h2>
       <div class="output-section">
         <div class="card-column">
           <div id="cardPreview" class="design-card" style="max-width: 560px; width: 100%;">
@@ -205,10 +187,26 @@ router.get('/', (_req, res) => {
           </div>
           <div class="export-link-row" style="margin-top: 1.5rem;">
             <button type="button" onclick="window.location.href='/nc-static/export.html'" class="export-link-button">Open export preview</button>
+            <input type="file" id="bgImageInput" accept="image/*" style="display:none;" />
+            <button type="button" id="changeBgBtn" class="export-link-button" style="margin-left: 0.5rem;">Change background</button>
+            <button type="button" id="toggleMoveModeBtn" class="export-link-button" style="margin-left: 0.5rem;">Move text</button>
+          </div>
+          <div id="bgMenu" style="display:none; margin-top:0.5rem; padding:0.75rem; border:1px solid #ddd; border-radius:8px; background:#fff5ef; max-width:560px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
+              <button type="button" id="bgUploadBtn" class="export-link-button">Choose image…</button>
+              <button type="button" id="toggleMoveBgBtn" class="export-link-button">Move background</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; width:100%; margin-top:8px;">
+              <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitCover" value="cover" checked> Cover</label>
+              <label style="font-size:0.9rem; color:#555;"><input type="radio" name="bgFit" id="bgFitContain" value="contain"> Contain</label>
+              <label style="font-size:0.9rem; color:#555; margin-left:auto;">Overlay:
+                <input type="range" id="bgOverlay" min="0" max="0.35" step="0.01" value="0.15" style="vertical-align:middle; width:180px; margin-left:0.35rem;">
+              </label>
+            </div>
           </div>
         </div>
         <div class="qr-section">
-          <p class="hint" style="font-size:0.85rem; color:#555; margin-top:0; text-align:left;">
+          <p class="hint">
             QR code contact:
             <button type="button" id="showOnlineQrBtn" class="qr-toggle-link">Online</button>
             <button type="button" id="showVcardQrBtn" class="qr-toggle-link">Phone</button>
@@ -224,7 +222,7 @@ router.get('/', (_req, res) => {
     </section>
 
     <section id="result-section" style="display:none;">
-      <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Scan link &amp; QR</h2>
+      <h2>Scan link &amp; QR</h2>
       <p class="muted">Share this link behind a QR code or short URL. Each scan will be logged in the secure dashboard.</p>
       <div class="output-section">
         <div class="qr-section">
