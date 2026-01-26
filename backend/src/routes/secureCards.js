@@ -62,7 +62,16 @@ router.get('/', (_req, res) => {
         <img src="/image/logoCDC.png" alt="CDC symbol" class="brand-logo" />
         <img src="/image/nom.png" alt="Cœur Du Ciel (CDC)" class="brand-wordmark" />
       </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
       <nav class="main-nav">
+        <a href="/nc-static/cdcwebsite/index.html#home" class="nav-link">Home</a>
+        <a href="/nc-static/cdcwebsite/index.html#about" class="nav-link">About</a>
+        <a href="/nc-static/cdcwebsite/index.html#services" class="nav-link">Services</a>
+        <a href="/nc-static/cdcwebsite/index.html#portfolio" class="nav-link">Portfolio</a>
+        <a href="/nc-static/cdcwebsite/index.html#contact" class="nav-link">Contact</a>
         <a href="/secure-dashboard" class="nav-link">Dashboard</a>
       </nav>
     </div>
