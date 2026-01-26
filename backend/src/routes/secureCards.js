@@ -154,7 +154,7 @@ router.get('/', (_req, res) => {
       <h2 style="font-size:1rem; margin:0 0 0.6rem 0; color:#333;">Live preview</h2>
       <div class="output-section">
         <div class="card-column">
-          <div id="cardPreview" class="design-card" style="max-width:560px; width:100%;">
+          <div id="cardPreview" class="design-card" style="max-width: 560px; width: 100%;">
             <div class="design-text-block">
               <div class="design-header-row">
                 <img src="/image/logoCDC.png" alt="CDC" class="design-logo" />
@@ -178,6 +178,9 @@ router.get('/', (_req, res) => {
                 <span class="design-line" id="designAddress">Address will appear here</span>
               </div>
             </div>
+          </div>
+          <div class="export-link-row" style="margin-top: 1.5rem;">
+            <button type="button" onclick="window.location.href='/nc-static/export.html'" class="export-link-button">Open export preview</button>
           </div>
         </div>
       </div>
