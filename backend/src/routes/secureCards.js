@@ -220,7 +220,6 @@ router.get('/', (_req, res) => {
       <div class="output-section">
         <div class="qr-section">
           <p id="scanUrlText" style="font-size:0.85rem; word-break:break-all; margin-bottom:0.5rem;"></p>
-          <div id="qrBox" class="qr-box"></div>
           <a id="openScanBtn" class="export-link-button" href="#" target="_blank" rel="noopener" style="margin-top:0.75rem; display:none;">Open preview page</a>
         </div>
       </div>
