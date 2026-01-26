@@ -198,6 +198,19 @@ router.get('/', (_req, res) => {
             <button type="button" onclick="window.location.href='/nc-static/export.html'" class="export-link-button">Open export preview</button>
           </div>
         </div>
+        <div class="qr-section">
+          <p class="hint" style="font-size:0.85rem; color:#555; margin-top:0; text-align:left;">
+            QR code contact:
+            <button type="button" id="showOnlineQrBtn" class="qr-toggle-link">Online</button>
+            <button type="button" id="showVcardQrBtn" class="qr-toggle-link">Phone</button>
+          </p>
+          <div id="onlineQrPanel" style="margin-top:0.5rem;">
+            <div id="qrcode" class="qr-box"></div>
+          </div>
+          <div id="vcardQrPanel" style="margin-top:0.5rem; display:none;">
+            <div id="directQrcode" class="qr-box"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -229,6 +242,13 @@ router.get('/', (_req, res) => {
       var scanUrlText = document.getElementById('scanUrlText');
       var qrBox = document.getElementById('qrBox');
       var openScanBtn = document.getElementById('openScanBtn');
+      // Preview QR toggle controls (mirrors public page)
+      var onlineQrPanel = document.getElementById('onlineQrPanel');
+      var vcardQrPanel = document.getElementById('vcardQrPanel');
+      var showOnlineQrBtn = document.getElementById('showOnlineQrBtn');
+      var showVcardQrBtn = document.getElementById('showVcardQrBtn');
+      var onlineQrBox = document.getElementById('qrcode');
+      var directQrBox = document.getElementById('directQrcode');
 
       var firstNameInput = document.getElementById('firstName');
       var lastNameInput = document.getElementById('lastName');
@@ -293,6 +313,36 @@ router.get('/', (_req, res) => {
           });
         } catch (e) {
           qrBox.textContent = 'Unable to generate QR code.';
+        }
+      }
+
+      function renderOnlinePreviewQr(text) {
+        if (!onlineQrBox) return;
+        onlineQrBox.innerHTML = '';
+        if (!text) return;
+        try {
+          new QRCode(onlineQrBox, { text: text, width: 180, height: 180, correctLevel: QRCode.CorrectLevel.L });
+        } catch (e) {
+          onlineQrBox.textContent = 'Unable to generate QR code.';
+        }
+      }
+
+      function initQrToggle() {
+        if (showOnlineQrBtn) {
+          showOnlineQrBtn.addEventListener('click', function() {
+            if (onlineQrPanel) onlineQrPanel.style.display = 'block';
+            if (vcardQrPanel) vcardQrPanel.style.display = 'none';
+            showOnlineQrBtn.classList.add('active');
+            if (showVcardQrBtn) showVcardQrBtn.classList.remove('active');
+          });
+        }
+        if (showVcardQrBtn) {
+          showVcardQrBtn.addEventListener('click', function() {
+            if (onlineQrPanel) onlineQrPanel.style.display = 'none';
+            if (vcardQrPanel) vcardQrPanel.style.display = 'block';
+            showVcardQrBtn.classList.add('active');
+            if (showOnlineQrBtn) showOnlineQrBtn.classList.remove('active');
+          });
         }
       }
 
@@ -465,6 +515,7 @@ router.get('/', (_req, res) => {
               var scanUrl = data.card.scanUrl;
               scanUrlText.textContent = scanUrl;
               renderQr(scanUrl);
+              renderOnlinePreviewQr(scanUrl);
               resultSection.style.display = 'block';
               if (openScanBtn) { openScanBtn.href = scanUrl; openScanBtn.style.display = 'inline-flex'; }
               try { if (window.localStorage) localStorage.setItem('namecard_last_scanUrl', scanUrl); } catch(_){ }
@@ -500,6 +551,7 @@ router.get('/', (_req, res) => {
         });
       });
 
+      initQrToggle();
       initAccess();
     })();
   </script>
