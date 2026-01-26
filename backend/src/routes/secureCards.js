@@ -237,6 +237,29 @@ router.get('/', (_req, res) => {
       var authToken = '';
       var currentUser = null;
 
+      var LOCAL_KEY_LAST = 'namecard_last';
+
+      function saveLastDraft() {
+        try {
+          var data = {
+            firstName: (firstNameInput && firstNameInput.value || '').trim(),
+            lastName: (lastNameInput && lastNameInput.value || '').trim(),
+            mobile: (mobileInput && mobileInput.value || '').trim(),
+            office: (officeInput && officeInput.value || '').trim(),
+            company: (companyInput && companyInput.value || '').trim(),
+            position: (positionInput && positionInput.value || '').trim(),
+            email: (emailInput && emailInput.value || '').trim(),
+            addressStreet: (addressStreetInput && addressStreetInput.value || '').trim(),
+            addressCity: (addressCityInput && addressCityInput.value || '').trim(),
+            addressRegion: (addressRegionInput && addressRegionInput.value || '').trim(),
+            addressZipCountry: (addressZipCountryInput && addressZipCountryInput.value || '').trim()
+          };
+          if (window.localStorage) {
+            window.localStorage.setItem(LOCAL_KEY_LAST, JSON.stringify(data));
+          }
+        } catch (_) {}
+      }
+
       function setStatus(message, type) {
         createStatus.textContent = message || '';
         createStatus.className = 'status' + (type ? ' ' + type : '');
@@ -385,6 +408,9 @@ router.get('/', (_req, res) => {
           var region = (addressRegionInput.value || '').trim();
           var zipCountry = (addressZipCountryInput.value || '').trim();
 
+          // Persist latest draft so export/preview pages mirror the same content
+          saveLastDraft();
+
           // Use a literal "\\n" in the client script so the address uses line breaks
           // without breaking this server-side template string.
           var address = [street, city, region, zipCountry].filter(function(s) { return s; }).join('\\n');
@@ -426,6 +452,7 @@ router.get('/', (_req, res) => {
               renderQr(scanUrl);
               resultSection.style.display = 'block';
               if (openScanBtn) { openScanBtn.href = scanUrl; openScanBtn.style.display = 'inline-flex'; }
+              try { if (window.localStorage) localStorage.setItem('namecard_last_scanUrl', scanUrl); } catch(_){ }
               setStatus('Card created.', 'ok');
             })
             .catch(function(err) {
@@ -454,6 +481,7 @@ router.get('/', (_req, res) => {
         if (!el) return;
         el.addEventListener('input', function() {
           updatePreview();
+          saveLastDraft();
         });
       });
 

@@ -29,6 +29,9 @@ app.use(express.json());
 // __dirname here is backend/src, so go two levels up to reach NameCard/image
 const imageDir = path.resolve(__dirname, '../../image');
 app.use('/image', express.static(imageDir));
+// Serve logo assets used by export and pages referencing /logo
+const logoDir = path.resolve(__dirname, '../../logo');
+app.use('/logo', express.static(logoDir));
 
 // Serve secure builder public assets (client JS)
 const publicDir = path.resolve(__dirname, './public');
