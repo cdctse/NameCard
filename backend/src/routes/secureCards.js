@@ -14,7 +14,7 @@ router.get('/', (_req, res) => {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Load the shared NameCard stylesheet. Note: cdcwebsite/styles.css is not present in this deploy, so we omit it. -->
-  <link rel="stylesheet" href="/nc-static/namecard.css" />
+  <link rel="stylesheet" href="/nc-static/namecard.css?v=secure-20260127-1" />
 </head>
 <body>
   <header class="site-header">
@@ -53,7 +53,7 @@ router.get('/', (_req, res) => {
     </section>
 
     <section class="form-section" id="form-section" style="display:none;">
-      <h2>Create NameCard</h2>
+      <h1>Create NameCard</h1>
       <form id="card-form">
         <div class="field-row">
           <label>
@@ -117,12 +117,10 @@ router.get('/', (_req, res) => {
           </label>
         </div>
 
-        <div class="field-row">
-          <label>
-            Email
-            <input type="email" id="email" placeholder="name@example.com" />
-          </label>
-        </div>
+        <label>
+          Email
+          <input type="email" id="email" placeholder="name@example.com" />
+        </label>
 
         <label>Address</label>
         <div class="field-row">
