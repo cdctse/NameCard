@@ -117,10 +117,12 @@ router.get('/', (_req, res) => {
           </label>
         </div>
 
-        <label>
-          Email
-          <input type="email" id="email" placeholder="name@example.com" />
-        </label>
+        <div class="field-row">
+          <label>
+            Email
+            <input type="email" id="email" placeholder="name@example.com" />
+          </label>
+        </div>
 
         <label>Address</label>
         <div class="field-row">
@@ -143,9 +145,7 @@ router.get('/', (_req, res) => {
             <input type="text" id="addressZipCountry" />
           </label>
         </div>
-        </div>
-
-        <div style="margin-top:0.8rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+        <div class="export-link-row">
           <button type="submit" id="createCardBtn" class="export-link-button">Create card</button>
           <button type="button" id="backToDashboardBtn" class="export-link-button">Back to dashboard</button>
         </div>
