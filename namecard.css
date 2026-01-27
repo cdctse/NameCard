@@ -148,6 +148,13 @@ main {
   margin: 6rem 0 2rem;   /* larger space above the card body so border clears header */
 }
 
+.form-section h2 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
 .field-row {
   display: flex;
   gap: 1.5rem;
@@ -235,6 +242,12 @@ button[type="submit"]:hover {
 
 .export-link-row {
   margin-top: 0.75rem;
+}
+
+.hint {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: #555;
 }
 
 .export-link-button {
