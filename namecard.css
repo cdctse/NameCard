@@ -158,7 +158,7 @@ main {
 .field-row {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .field-row > * {
@@ -167,7 +167,7 @@ main {
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
